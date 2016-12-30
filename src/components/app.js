@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+
 import TodosList from './todos-list';
 import CreateTodo from './create-todo';
+import styles from '../assets/css/app.css';
+
+injectTapEventPlugin();
 
 const todos = [
     {
@@ -25,15 +32,17 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1> React TODOs App </h1>
-                <CreateTodo createTask={this.createTask.bind(this)} />
-                <TodosList
-                    todos={this.state.todos}
-                    toggleTask={this.toggleTask.bind(this)}
-                    saveTask={this.saveTask.bind(this)} 
-                    deleteTask={this.deleteTask.bind(this)}/>
-            </div>
+            <MuiThemeProvider>
+                <div className={styles.html}>
+                    <h1 > React TODOs App </h1>
+                    <CreateTodo createTask={this.createTask.bind(this)} />
+                    <TodosList
+                        todos={this.state.todos}
+                        toggleTask={this.toggleTask.bind(this)}
+                        saveTask={this.saveTask.bind(this)}
+                        deleteTask={this.deleteTask.bind(this)} />
+                </div>
+            </MuiThemeProvider>
         )
     }
 

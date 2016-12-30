@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var combineLoaders = require('webpack-combine-loaders');
 var path = require('path');
 
 module.exports = {
@@ -24,6 +25,21 @@ module.exports = {
                 loaders: [
                     'react-hot',
                     'babel?presets[]=react,presets[]=es2015']
+            },
+            {
+                test: /\.css$/,
+                exclude: /node_modules/,
+                loader: combineLoaders([
+                    {
+                        loader: 'style-loader'
+                    }, {
+                        loader: 'css-loader',
+                        query: {
+                            modules: true,
+                            localIdentName: '[name]__[local]___[hash:base64:5]'
+                        }
+                    }
+                ])
             }
         ]
     },

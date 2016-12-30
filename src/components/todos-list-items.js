@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class TodosListItem extends Component {
     constructor(props) {
@@ -37,16 +38,16 @@ class TodosListItem extends Component {
         if (this.state.isEditing) {
             return (
                 <td>
-                    <button onClick={this.onSaveClick.bind(this)}>Save</button>
-                    <button onClick={this.onCancelClick.bind(this)}>Cancel</button>
+                    <RaisedButton onClick={this.onSaveClick.bind(this)} label="Save"/>
+                    <RaisedButton onClick={this.onCancelClick.bind(this)} label="Cancel"/>
                 </td>
             );
         }
 
         return (
             <td>
-                <button onClick={this.onEditClick.bind(this)}>Edit</button>
-                <button onClick={this.props.deleteTask.bind(this, this.props.task)}>Delete</button>
+                <RaisedButton  onClick={this.onEditClick.bind(this)} label="Edit"/>
+                <RaisedButton  onClick={this.props.deleteTask.bind(this, this.props.task)} label="Delete"/>
             </td>
         );
     }
