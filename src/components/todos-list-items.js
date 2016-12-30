@@ -15,10 +15,20 @@ class TodosListItem extends Component {
             color: isCompleted ? 'green' : 'red',
             cursor: 'pointer'
         };
-        return(
+
+        if (this.state.isEditing) {
+            return (
+                <td>
+                    <form onSubmit={this.onSaveClick.bind(this)}>
+                        <input type="text" defaultValue={task} ref="editInput" />
+                    </form>
+                </td>
+            )
+        }
+        return (
             <td style={taskStyle}
                 onClick={this.props.toggleTask.bind(this, task)}
-            >
+                >
                 {task}
             </td>
         );
@@ -27,7 +37,7 @@ class TodosListItem extends Component {
         if (this.state.isEditing) {
             return (
                 <td>
-                    <button>Save</button>
+                    <button onClick={this.onSaveClick.bind(this)}>Save</button>
                     <button onClick={this.onCancelClick.bind(this)}>Cancel</button>
                 </td>
             );
@@ -56,6 +66,16 @@ class TodosListItem extends Component {
 
     onCancelClick() {
         this.setState({ isEditing: false })
+    }
+
+    onSaveClick(event) {
+        event.preventDefault();
+
+        const oldTask = this.props.task;
+        const newTask = this.refs.editInput.value;
+        this.props.saveTask(oldTask, newTask);
+        this.setState({ isEditing: false });
+
     }
 }
 
