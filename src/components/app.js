@@ -31,7 +31,8 @@ class App extends React.Component {
                 <TodosList
                     todos={this.state.todos}
                     toggleTask={this.toggleTask.bind(this)}
-                    saveTask={this.saveTask.bind(this)}/>
+                    saveTask={this.saveTask.bind(this)} 
+                    deleteTask={this.deleteTask.bind(this)}/>
             </div>
         )
     }
@@ -57,6 +58,11 @@ class App extends React.Component {
         this.setState({
             todos: this.state.todos
         });
+    }
+
+    deleteTask(task) {
+        _.remove(this.state.todos, todo => todo.task === task);
+        this.setState({ todos: this.state.todos });
     }
 }
 
